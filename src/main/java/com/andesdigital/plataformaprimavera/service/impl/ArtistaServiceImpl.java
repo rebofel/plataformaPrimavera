@@ -23,5 +23,21 @@ public class ArtistaServiceImpl implements ArtistaService {
                 .collect(Collectors.toList());
         return artistasDataSource;
     }
+
+    @Override
+    public Artista guardarArtista(Artista artista) {
+
+        return this.artistaRepository.save(artista);
+    }
+
+    @Override
+    public Artista actualizarArtista(Artista artista) {
+        return this.artistaRepository.save(artista);
+    }
+
+    @Override
+    public void eliminarArtista(Long id) {
+        this.artistaRepository.deleteById(id);
+    }
 }
 

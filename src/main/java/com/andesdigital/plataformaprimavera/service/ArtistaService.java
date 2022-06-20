@@ -8,4 +8,9 @@ public interface ArtistaService {
 
     List<Artista> consultarArtistas();
 
+    Artista guardarArtista(Artista artista);
+
+    Artista actualizarArtista(Artista artista);
+
+    void eliminarArtista(Long id);
 }

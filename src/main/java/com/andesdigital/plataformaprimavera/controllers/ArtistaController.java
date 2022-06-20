@@ -3,11 +3,9 @@ package com.andesdigital.plataformaprimavera.controllers;
 import com.andesdigital.plataformaprimavera.entity.Artista;
 import com.andesdigital.plataformaprimavera.service.ArtistaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,29 @@ public class ArtistaController {
         List<Artista> artistasConsultados = artistaServiceImpl.consultarArtistas();
 
         return ResponseEntity.ok(artistasConsultados);
+    }
+
+@PostMapping
+@RequestMapping(value = "guardarArtista", method = RequestMethod.POST)
+    public ResponseEntity<?> guardarArtista(@RequestBody Artista artista) {
+        Artista artistaGuardado = this.artistaServiceImpl.guardarArtista(artista);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(artistaGuardado);
+    }
+
+    @PutMapping
+    @RequestMapping(value = "actualizarArtista", method = RequestMethod.PUT)
+    public ResponseEntity<?> actualizarArtista(@RequestBody Artista artista) {
+        Artista artistaActualizado = this.artistaServiceImpl.actualizarArtista(artista);
+
+        return ResponseEntity.status(HttpStatus.OK).body(artistaActualizado);
+    }
+
+    @DeleteMapping
+    @RequestMapping(value = "eliminarArtista/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> eliminarArtista(@PathVariable Long id) {
+        this.artistaServiceImpl.eliminarArtista(id);
+
+        return ResponseEntity.ok().build();
     }
 }
